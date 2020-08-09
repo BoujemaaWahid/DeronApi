@@ -14,7 +14,7 @@ public class AuthController {
     }
     @GetMapping("/hello")
     public String hello(){
-        return "Hello";
+        return "Hello 45";
     }
     @GetMapping("/ko")
     public String ko(){ return "ko"; }
