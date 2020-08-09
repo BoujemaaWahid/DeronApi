@@ -1,7 +1,5 @@
 package com.deron.demo.security.jwt;
 
-
-import com.sun.istack.internal.NotNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
@@ -15,7 +13,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
 
-    public JwtAuthenticationFilter(@NotNull  String...guards) {
+    public JwtAuthenticationFilter(String...guards) {
         super( new JwtHandler.JwtMatchers(guards) );
     }
 

@@ -84,8 +84,8 @@ public class JwtHandler {
         }
         @Override
         public boolean matches(HttpServletRequest request) {
-            if( forNotSecuredRoutes(request, "/deron/auth") )return true;
-            else if( guards == null )return false;
+            /*if( forNotSecuredRoutes(request, "/deron/auth") )return true;
+            else*/ if( guards == null )return false;
             else if ( isAll ) return true;
             else if ( matchGlobal(request.getRequestURI() ) ) return true;
             return ( guards.indexOf( request.getRequestURI() ) != -1 );

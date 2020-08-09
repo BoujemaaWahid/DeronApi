@@ -12,6 +12,10 @@ public class AuthController {
     public String home(){
         return "hello";
     }
+    @GetMapping("/hello")
+    public String hello(){
+        return "Hello";
+    }
     @GetMapping("/ko")
     public String ko(){ return "ko"; }
     
