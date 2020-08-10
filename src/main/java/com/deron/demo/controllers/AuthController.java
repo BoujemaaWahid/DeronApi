@@ -1,6 +1,6 @@
 package com.deron.demo.controllers;
 
-import com.deron.demo.dtos.LoginDto;
+import com.deron.demo.dtos.LoginResponseDto;
 import com.deron.demo.services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ public class AuthController {
         return "hello";
     }
     @GetMapping("/hello")
-    public LoginDto hello(){
+    public LoginResponseDto hello(){
 
         return services.canLogin("a@a.a", "0000");
 

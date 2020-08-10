@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginDto implements Serializable {
+public class LoginResponseDto implements Serializable {
     @JsonProperty("error")
     private boolean error = true;
     @JsonProperty("id")
