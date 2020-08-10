@@ -1,5 +1,4 @@
 package com.deron.demo.entitys;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,8 +21,22 @@ public class Trace {
     private Person person;
     private Date connection_date;
     private Date deconnection_date;
-    private String connection_place;
+    private String city;
+    private String hostname;
+    private String region;
+    private String country;
+    private String postal;
+    private String timezone;
+    private String asn;
+    private String asn_name;
+    private String asn_domain;
+    private String asn_route;
+    private String asn_type;
+    private String connection_ip;
     private String connection_device;
     private String system_device;
-    private Boolean trust_connection = true;
+    private boolean privacy_vpn;
+    private boolean privacy_proxy;
+    private boolean privacy_tor;
+    private Boolean trust_connection;
 }

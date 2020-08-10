@@ -2,7 +2,6 @@ package com.deron.demo.services;
 
 import com.deron.demo.daos.PersonDAO;
 import com.deron.demo.daos.TraceDAO;
-import com.deron.demo.dtos.LoginBodyDto;
 import com.deron.demo.dtos.LoginResponseDto;
 import com.deron.demo.dtos.PersonDto;
 import com.deron.demo.entitys.Person;
@@ -34,11 +33,11 @@ public class PersonServices {
         return personDAO.saveAndFlush(person).getId();
     }
 
-    public LoginResponseDto canLogin(LoginBodyDto loginBodyDto){
+    public LoginResponseDto canLogin(String email, String password){
         LoginResponseDto loginResponseDto = new LoginResponseDto();
-        Person p = personDAO.findPersonByEmail(loginBodyDto.getEmail());
+        Person p = personDAO.findPersonByEmail( email );
         if ( p == null )return loginResponseDto;
-        boolean match = bCryptPasswordEncoder.matches( loginBodyDto.getPassword(), p.getPassword() );
+        boolean match = bCryptPasswordEncoder.matches( password, p.getPassword() );
         if( !match )return loginResponseDto;
         RandomString rs = new RandomString(15);
         JwtUser jwtUser = new JwtUser();
@@ -50,7 +49,6 @@ public class PersonServices {
         loginResponseDto.setId( p.getId() );
         loginResponseDto.setToken( token );
         loginResponseDto.setError(false);
-        new TraceSaver(this.modelMapper, p.getId(), loginBodyDto, traceDAO);
         return loginResponseDto;
     }
 }
