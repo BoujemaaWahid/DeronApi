@@ -70,14 +70,13 @@ public class JwtHandler {
         private boolean matchGlobal(String url){
             if( url.charAt( url.length() -1 ) != '/' ) url += '/';
             for(String guard: matchersGuards ){
-                if ( url.indexOf( guard ) != -1 )return true;
+                if (url.contains(guard))return true;
             }
             return false;
         }
         private boolean canNotPass(HttpServletRequest request){
             if( request.getHeader("signature") == null )return true;
-            if( request.getHeader("signature").equals(EXTRA_SIGNATURE) ) return false;
-            return true;
+            return !request.getHeader("signature").equals(EXTRA_SIGNATURE);
         }
         @Override
         public boolean matches(HttpServletRequest request) {
