@@ -29,6 +29,7 @@ public class PersonDto implements Serializable {
     private String phone;
     @JsonProperty("password")
     private String password;
+    private String secret_key;
     @JsonProperty("gender")
     private char gender;
     @JsonProperty("signature")

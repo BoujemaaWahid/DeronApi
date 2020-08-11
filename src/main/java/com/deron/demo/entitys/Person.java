@@ -27,6 +27,7 @@ public class Person {
     private String phone;
     @Column(nullable = false)
     private String password;
+    private String secret_key;
     private char gender;
     @Lob
     private String signature;

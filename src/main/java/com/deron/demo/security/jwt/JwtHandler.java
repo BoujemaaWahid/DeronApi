@@ -10,8 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +17,7 @@ import java.util.regex.Pattern;
 
 public class JwtHandler {
     public static String SECRET_KEY = "SECRET_KEY";
-    public static String NON_SECURED_KEY = "284a7215bd337000fb86221a2b83cabb";
+    public static String EXTRA_SIGNATURE = "284a7215bd337000fb86221a2b83cabb";
     public static class onFail implements AuthenticationFailureHandler {
         @Override
         public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
@@ -76,16 +74,15 @@ public class JwtHandler {
             }
             return false;
         }
-        private boolean forNotSecuredRoutes(HttpServletRequest request, String prefix){
-            if( request.getRequestURI().indexOf(prefix) == -1 )return false;
+        private boolean canNotPass(HttpServletRequest request){
             if( request.getHeader("signature") == null )return true;
-            if( request.getHeader("signature").equals(NON_SECURED_KEY) ) return false;
+            if( request.getHeader("signature").equals(EXTRA_SIGNATURE) ) return false;
             return true;
         }
         @Override
         public boolean matches(HttpServletRequest request) {
-            /*if( forNotSecuredRoutes(request, "/deron/auth") )return true;
-            else*/ if( guards == null )return false;
+            if( canNotPass(request) ) return true;
+            if( guards == null )return false;
             else if ( isAll ) return true;
             else if ( matchGlobal(request.getRequestURI() ) ) return true;
             return ( guards.indexOf( request.getRequestURI() ) != -1 );

@@ -1,10 +1,11 @@
 package com.deron.demo.controllers;
 
+import com.deron.demo.dtos.DeconnectBodyDto;
+import com.deron.demo.dtos.LoginBodyDto;
 import com.deron.demo.dtos.LoginResponseDto;
 import com.deron.demo.services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 
 
 @RestController
@@ -17,13 +18,15 @@ public class AuthController {
     public String home(){
         return "hello";
     }
-    @GetMapping("/hello")
-    public LoginResponseDto hello(){
+    
+    @PostMapping("/login")
+    public LoginResponseDto login(@RequestBody LoginBodyDto lbd){
+        return services.canLogin(lbd);
+    }
 
-        return services.canLogin("a@a.a", "0000");
-
-        //return services.getPersonByEmail("boujemaa.wahid@gmail.com");
-        //return "Hello 45";
+    @PostMapping("/disconnect")
+    public void disconnect(@RequestBody DeconnectBodyDto dbd){
+        services.deconnect(dbd);
     }
     @GetMapping("/ko")
     public String ko(){ return "ko"; }
